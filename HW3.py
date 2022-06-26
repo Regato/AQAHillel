@@ -25,7 +25,7 @@ else:
     if 0 < number_input <= word_len:
         output_symbol = symbol_list[number_input-1]
         print(f'The {number_input} symbol in {word_input} is {output_symbol}')
-    elif number_input == 0 or number_input < 0:
+    elif number_input <= 0:
         print('You can\'t use zero or negative numbers!')
     else:
         print(f'Invalid number, word lenght is {word_len}, but you entered {number_input}')
