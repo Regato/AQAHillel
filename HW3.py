@@ -1,8 +1,10 @@
-# Exercise 1
-import simplejson as simplejson
+import re
+import sympy
+import simplejson
 
+
+# Exercise 1
 word_input = input('Please enter a one string word:')
-number_input = eval(input('Please enter an integer number:'))
 word_len = len(word_input)
 symbol_list = []
 
@@ -13,8 +15,13 @@ else:
     for symbol in word_input:
         symbol_list.append(symbol)
 
-# Check is number integer or not
-if isinstance(number_input, int):
+# Try is number integer or not
+try:
+    number_input = sympy.parsing.sympy_parser.parse_expr(input('Please enter an integer number:'))
+    isinstance(number_input, int)
+except:
+    print('Invalid number, please enter an integer number!')
+else:
     if 0 < number_input <= word_len:
         output_symbol = symbol_list[number_input-1]
         print(f'The {number_input} symbol in {word_input} is {output_symbol}')
@@ -22,13 +29,9 @@ if isinstance(number_input, int):
         print('You can\'t use zero or negative numbers!')
     else:
         print(f'Invalid number, word lenght is {word_len}, but you entered {number_input}')
-else:
-    print('Invalid number, please enter an integer number!')
 
 
 # Exercise 2
-import re
-
 string_input = input('Please enter any string of word/words:')
 word_counter = len((re.findall(r'\w+', string_input)))
 
@@ -42,16 +45,17 @@ else:
 
 
 # Exercise 3
-import sympy
-import simplejson
-
 input_list = input('Please enter a list with any data:')
-sympy_list = sympy.parsing.sympy_parser.parse_expr(input_list)
 unpacked_list = []
 number_list = []
 
 # Check is list entered correctly
-if isinstance(sympy_list, list):
+try:
+    sympy_list = sympy.parsing.sympy_parser.parse_expr(input_list)
+    isinstance(sympy_list, list)
+except:
+    print('Invalid list, please enter a list with any data!')
+else:
     # Unpacking all included lists in list
     for index in input_list:
         if isinstance(index, list):
@@ -78,5 +82,3 @@ if isinstance(sympy_list, list):
         print(f'Numbers list is: {number_list}')
     else:
         print(f'Numbers list is empty!')
-else:
-    print('Invalid list, please enter a list with any data!')
