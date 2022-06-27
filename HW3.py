@@ -1,8 +1,6 @@
 import re
-import tokenize
-
 import sympy
-from sympy.utilities import exceptions
+import tokenize
 
 
 # Exercise 1
