@@ -1,6 +1,8 @@
 import re
+import tokenize
+
 import sympy
-import simplejson
+from sympy.utilities import exceptions
 
 
 # Exercise 1
@@ -17,9 +19,8 @@ else:
 
 # Try is number integer or not
 try:
-    number_input = sympy.parsing.sympy_parser.parse_expr(input('Please enter an integer number:'))
-    isinstance(number_input, int)
-except:
+    number_input = int(input('Please enter an integer number:'))
+except ValueError:
     print('Invalid number, please enter an integer number!')
 else:
     if 0 < number_input <= word_len:
@@ -46,39 +47,28 @@ else:
 
 # Exercise 3
 input_list = input('Please enter a list with any data:')
-unpacked_list = []
 number_list = []
 
 # Check is list entered correctly
 try:
     sympy_list = sympy.parsing.sympy_parser.parse_expr(input_list)
-    isinstance(sympy_list, list)
-except:
+except tokenize.TokenError:
     print('Invalid list, please enter a list with any data!')
+except SyntaxError:
+    print('It is not a list! Please enter a list with any data!')
 else:
-    # Unpacking all included lists in list
-    for index in input_list:
-        if isinstance(index, list):
-            list_counter = str(index).count('[')
-            string_value = str(index)
-            unpack_value = '[' + string_value[list_counter: -list_counter: 1] + ']'
-            json_unpack = simplejson.loads(unpack_value)
-            unpacked_list += json_unpack
-        else:
-            unpacked_list.append(index)
     # Check all values in list for numbers
-    for value in unpacked_list:
-        if isinstance(value, int) or isinstance(value, float):
-            number_list.append(value)
-        elif isinstance(value, str):
-            if value.isnumeric():
-                value = sympy.parsing.sympy_parser.parse_expr(value)
+    if isinstance(sympy_list, list):
+        for value in sympy_list:
+            string_value = str(value)
+            if string_value.isnumeric():
+                output_value = eval(string_value)
                 number_list.append(value)
             else:
                 pass
+        if len(number_list) > 0:
+            print(f'Numbers list is: {number_list}')
         else:
-            pass
-    if len(number_list) > 0:
-        print(f'Numbers list is: {number_list}')
+            print(f'Numbers list is empty!')
     else:
-        print(f'Numbers list is empty!')
+        print('It is not a list! Please enter a list with any data!')
