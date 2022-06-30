@@ -1,36 +1,25 @@
 import re
 import sympy
 import tokenize
-from langdetect import detect
-from langdetect.lang_detect_exception import LangDetectException
 
 
 # Exercise 1
 str_input = input('Please enter any string in English:')
 # Making from string a list of words (splitting)
 str_split = str_input.split(' ')
+counter = 0
 
-# Checking is language of string English
-try:
-    lang = detect(str_input)
-except LangDetectException:
-    print('Language is incorrect, please enter a string in English!')
-else:
-    if lang == 'en':
-        counter = 0
-        for word in str_split:
-            # Checking and counting for Vowels
-            result = len(re.findall(r'aa|AA|ee|EE|ii|II|uu|UU|oo|OO', word))
-            if result == 1:
-                counter += 1
-            else:
-                pass
-        if counter == 1:
-            print(f'This string contains {counter} word with double vowels in a row')
-        else:
-            print(f'This string contains {counter} words with double vowels in a row')
+for word in str_split:
+    # Checking and counting for Vowels
+    result = len(re.findall(r'aa|AA|ee|EE|ii|II|uu|UU|oo|OO', word))
+    if result == 1:
+        counter += 1
     else:
-        print(f'You used {lang} language, please use English')
+        pass
+if counter == 1:
+    print(f'This string contains {counter} word with double vowels in a row')
+else:
+    print(f'This string contains {counter} words with double vowels in a row')
 
 
 # Exercise 2
