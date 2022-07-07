@@ -1,0 +1,62 @@
+import tokenize
+import sympy
+from sympy import Integer
+from sympy import Float
+
+
+input_value = input('Please enter your age (Integer or Float Number):')
+
+
+def cinema_age(value):
+    """
+    Cinema function with types documented in the docstring.
+
+    Args:
+        value (int, float): The first parameter.
+
+    Returns:
+        str: Returns response with value (formatted).
+    """
+
+    int_bool = isinstance(value, Integer)
+    float_bool = isinstance(value, Float)
+
+    str_value = str(value)
+    str_reversed = ''.join(reversed(str_value))
+    str_len = len(str_value)
+
+    # Check is value Integer or Float
+    if int_bool or float_bool:
+        if value < 7:
+            response_message = f'You are {value}! Where are your parents?'
+
+            return response_message
+        elif value < 16:
+            response_message = f'You are only {value}, but this film is adults only!'
+
+            return response_message
+        elif value > 65:
+            response_message = f'Are you {value}? Show your pension ID!'
+
+            return response_message
+        elif str_value == str_reversed and str_len > 1:
+            response_message = f'Oh you are {value}! What\'s the interesting age!'
+
+            return response_message
+        else:
+            response_message = f'Despite you are {value}, there are no tickets anymore!'
+
+            return response_message
+    else:
+        print('It is not Integer or Float! Please enter your age (Integer or Float Number)!!!')
+
+
+# Parsing value (argument) from input
+try:
+    sympy_value = sympy.parsing.sympy_parser.parse_expr(input_value)
+except tokenize.TokenError:
+    print('Invalid age, please enter your age (Integer or Float Number)')
+except SyntaxError:
+    print('It is not your age! Please enter your age (Integer or Float Number)!!!')
+else:
+    print(cinema_age(sympy_value))
