@@ -1,10 +1,11 @@
+import os
+import sys
 import tokenize
 import sympy
 from sympy import Integer
-from sympy import Float
 
 
-input_value = input('Please enter your age (Integer or Float Number):')
+input_value = input('Please enter your age (Integer Number):')
 
 
 def cinema_age(value):
@@ -19,23 +20,22 @@ def cinema_age(value):
     """
 
     int_bool = isinstance(value, Integer)
-    float_bool = isinstance(value, Float)
 
     str_value = str(value)
     str_reversed = ''.join(reversed(str_value))
     str_len = len(str_value)
 
     # Check is value Integer or Float
-    if int_bool or float_bool:
+    if int_bool and value >= 0:
         if value < 7:
             response_message = f'You are {value}! Where are your parents?'
 
             return response_message
-        elif value < 16:
+        elif value < 16 and not str_value == str_reversed:
             response_message = f'You are only {value}, but this film is adults only!'
 
             return response_message
-        elif value > 65:
+        elif value > 65 and not str_value == str_reversed:
             response_message = f'Are you {value}? Show your pension ID!'
 
             return response_message
@@ -48,15 +48,18 @@ def cinema_age(value):
 
             return response_message
     else:
-        print('It is not Integer or Float! Please enter your age (Integer or Float Number)!!!')
+        print('It is not Integer! Please enter your age (Integer Number)!!!')
+        os.execl(sys.executable, sys.executable, *sys.argv)
 
 
 # Parsing value (argument) from input
 try:
     sympy_value = sympy.parsing.sympy_parser.parse_expr(input_value)
 except tokenize.TokenError:
-    print('Invalid age, please enter your age (Integer or Float Number)')
+    print('Invalid age, please enter your age (Integer Number)')
+    os.execl(sys.executable, sys.executable, *sys.argv)
 except SyntaxError:
-    print('It is not your age! Please enter your age (Integer or Float Number)!!!')
+    print('It is not your age! Please enter your age (Integer Number)!!!')
+    os.execl(sys.executable, sys.executable, *sys.argv)
 else:
     print(cinema_age(sympy_value))
