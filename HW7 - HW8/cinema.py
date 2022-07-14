@@ -5,7 +5,13 @@ import sympy
 from sympy import Integer
 
 
-def input_value():
+def restart_program():
+    os.execl(sys.executable, sys.executable, *sys.argv)
+
+    return None
+
+
+def make_input():
     """Cinema strict for user age
 
         Returns:
@@ -14,10 +20,10 @@ def input_value():
 
     input_string = input('Please enter your age (Integer Number):')
 
-    return input_value
+    return input_string
 
 
-def cinema_age(value):
+def cinema_age(value: sympy) -> sympy:
     """Cinema strict for user age
 
         Args:
@@ -57,9 +63,14 @@ def cinema_age(value):
             response_message = f'Despite you are {value}, there are no tickets anymore!'
 
             return response_message
+    elif int_bool and value < 0:
+        response_message = f'It is not your age!!! {value} is smaller than 0.'
+
+        return response_message
     else:
-        print('It is not Integer! Please enter your age (Integer Number)!!!')
-        os.execl(sys.executable, sys.executable, *sys.argv)
+        response_message = 'It is not Integer! Please enter your age (Integer Number)!!!'
+
+        return response_message
 
 
 def parse_value(value: str) -> str:
@@ -69,7 +80,7 @@ def parse_value(value: str) -> str:
           value: Any string value.
 
         Returns:
-          Sympy parsed value or restart a program.
+          Sympy parsed value.
 
         Raises:
           tokenize.TokenError: If value can not be parsed.
@@ -77,21 +88,15 @@ def parse_value(value: str) -> str:
     """
 
     try:
-        sympy_value = sympy.parsing.sympy_parser.parse_expr(input_value)
+        sympy_value = sympy.parsing.sympy_parser.parse_expr(value)
     except tokenize.TokenError:
         output_message = 'Invalid age, please enter your age (Integer Number)'
 
         return output_message
-
-        # Restart a program
-        os.execl(sys.executable, sys.executable, *sys.argv)
     except SyntaxError:
         output_message = 'It is not your age! Please enter your age (Integer Number)!!!'
 
         return output_message
-
-        # Restart a program
-        os.execl(sys.executable, sys.executable, *sys.argv)
     else:
 
         return sympy_value
