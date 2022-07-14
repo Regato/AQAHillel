@@ -68,9 +68,7 @@ def cinema_age(value: sympy) -> sympy:
 
         return response_message
     else:
-        response_message = 'It is not Integer! Please enter your age (Integer Number)!!!'
-
-        return response_message
+        return None
 
 
 def parse_value(value: str) -> str:
