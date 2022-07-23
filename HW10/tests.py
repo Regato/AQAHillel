@@ -1,8 +1,8 @@
 from random import randint
 from unittest import TestCase
 
-from first_function import input_argument
-from second_function import output_collection
+from HW10 import input_argument
+from HW10 import output_collection
 
 
 # Returns random number in range from first to last
@@ -28,13 +28,12 @@ class TestListValue(TestCase):
 
     def test_value_function(self):
         result = input_argument(self.random_value)
+        check_result = self.random_value * 100
 
-        self.assertEqual(result, self.random_value)
+        self.assertEqual(result, check_result)
 
     def test_list_function(self):
-        result = input_argument(self.random_value)
-        result_list = output_collection(self.random_list, result)
+        result_list = output_collection(self.random_list, input_argument)
+        check_result = [input_argument(item) for item in self.random_list]
 
-        for item in result_list:
-            item_check = item % result == 0
-            self.assertTrue(item_check)
+        self.assertEqual(result_list, check_result)
