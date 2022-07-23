@@ -5,7 +5,7 @@ def input_argument(value):
         value(int): any integer argument
 
     Returns:
-        output_value(int): division value by 2
+        output_value(int): multiple value by 100
     """
     output_value = (value * 100)
 
