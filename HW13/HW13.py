@@ -3,7 +3,6 @@ from datetime import date
 from request import Vacation
 from request import SickLeave
 from request import DayOff
-from request import title_type
 
 
 if __name__ == '__main__':
