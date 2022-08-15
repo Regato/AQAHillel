@@ -101,7 +101,6 @@ class CoffeeMachine(object):
 
             # Make payment 0 and print it
             self.__class__.payment = 0.0
-            print(f'Your change is {change}')
 
         # Check is order sum smaller than payment
         elif order_sum < self.__class__.payment:
