@@ -74,6 +74,9 @@ class Director(Human):
     def print_human_list(self):
         print(self.__class__.human_list)
 
+    def __del__(self):
+        pass
+
 
 New_Head_Teacher = nt('New_Head_Teacher', ('first_name', 'last_name', 'age', 'position', 'sex'))
 
@@ -107,6 +110,9 @@ class HeadTeacher(Human):
 
     def print_human_list(self):
         print(self.__class__.human_list)
+
+    def __del__(self):
+        pass
 
 
 New_Teacher = nt('New_Teacher', ('first_name', 'last_name', 'age', 'position', 'sex'))
@@ -142,6 +148,9 @@ class Teacher(Human):
     def print_human_list(self):
         print(self.__class__.human_list)
 
+    def __del__(self):
+        pass
+
 
 New_Student = nt('New_Teacher', ('first_name', 'last_name', 'age', 'position', 'sex'))
 
@@ -175,3 +184,6 @@ class Student(Human):
 
     def print_human_list(self):
         print(self.__class__.human_list)
+
+    def __del__(self):
+        pass
