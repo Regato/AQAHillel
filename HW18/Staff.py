@@ -15,9 +15,9 @@ class SexEnum(Enum):
 class Human(ABC):
     """Takes first_name, last_name, age"""
     human_list: ClassVar[list] = list()
-    first_name: str
-    last_name: str
-    age: int
+    first_name: str = field(compare=True)
+    last_name: str = field(compare=True)
+    age: int = field(compare=True)
 
     def __post_init__(self):
         self.__class__.print_new_human(self)
@@ -158,7 +158,7 @@ New_Student = nt('New_Teacher', ('first_name', 'last_name', 'age', 'position', '
 @dataclass
 class Student(Human):
     sex: SexEnum
-    position: str = field(default=None)
+    position: str = field(default=None, compare=True)
 
     def print_sex(self):
         print(self.sex.value)

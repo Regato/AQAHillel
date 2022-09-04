@@ -44,6 +44,7 @@ New_Classroom = nt('Classroom', ('name', 'position', 'first_name', 'last_name'))
 
 class ClassRoom(School):
     """Takes parent class arguments and classroom_name, teacher_object (class object)"""
+
     def __init__(self, classroom_name, teacher_object, name=None, graduation=None):
         super().__init__(name, graduation)
         self.classroom_name = classroom_name
@@ -65,16 +66,22 @@ class ClassRoom(School):
 
     def new_student(self, student_object):
         # Add student to class
-        student = (New_Classroom(self.classroom_name,
-                                 student_object.position,
-                                 student_object.first_name,
-                                 student_object.last_name
-                                 )
-                   )
-        self.__class__.classrooms[self.classroom_name].append(student)
-        print(f'New student {student_object.first_name} '
-              f'{student_object.last_name} was added to {self.classroom_name}'
-              )
+        add_student = (New_Classroom(self.classroom_name,
+                                     student_object.position,
+                                     student_object.first_name,
+                                     student_object.last_name
+                                     )
+                       )
+
+        for student in self.__class__.classrooms[self.classroom_name]:
+            if add_student in self.__class__.classrooms[self.classroom_name]:
+                print('Cannot add this student to the classroom because he is already added.')
+            else:
+                self.__class__.classrooms[self.classroom_name].append(add_student)
+                print(f'New student {student_object.first_name} '
+                      f'{student_object.last_name} was added to {self.classroom_name}'
+                      )
+                break
 
     def print_classroom_list(self):
         # Classroom list
