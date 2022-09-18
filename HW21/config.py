@@ -4,7 +4,3 @@ class ConfigBaseUrl(object):
 
 class ConfigHeaders(object):
     headers = None
-
-
-class ConfigPhotoUrl(object):
-    photo = None

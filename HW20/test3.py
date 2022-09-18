@@ -38,7 +38,6 @@ def header_scope():
 @pytest.fixture(scope='function', autouse=True)
 def json_scope():
     def json_wrapper(*args):
-        print(len(args))
         json_body = json.dumps(
             {
                 "id": args[6],
