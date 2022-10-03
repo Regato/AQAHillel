@@ -30,8 +30,8 @@ action.perform()
 sleep(3)
 
 
-top_bar_navigation_button = chrome.find_element(by=By.XPATH, value=f"//a[@href=\"/{applications_url}\"]")
-top_bar_navigation_button.click()
+applications_button = chrome.find_element(by=By.XPATH, value=f"//a[@href=\"/{applications_url}\"]")
+applications_button.click()
 sleep(5)
 
 check_title = "Applications for Python | Python.org"
