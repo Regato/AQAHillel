@@ -1,4 +1,4 @@
-first_name last_name email gender
-Michael Johnson michael@gmail.com male
-John Snowden john@gmail.com male
-Kianu Reevz kianu@gmail.com male
+first_name,last_name,email,gender
+Michael,Johnson,michael@gmail.com,male
+John,Snowden,john@gmail.com,male
+Kianu,Reevz,kianu@gmail.com,male
